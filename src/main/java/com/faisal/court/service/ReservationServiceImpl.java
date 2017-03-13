@@ -28,13 +28,54 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public List<Reservation> query(String courtName) {
-		List<Reservation> result=new ArrayList<Reservation>();
-		for(Reservation reservation:reservations){
-			if(reservation.getCourtName().equals(courtName))
+		List<Reservation> result = new ArrayList<Reservation>();
+		for (Reservation reservation : reservations) {
+			if (reservation.getCourtName().equals(courtName))
 				result.add(reservation);
 		}
 		return result;
-			
 	}
 
+	@Override
+	public List<Reservation> getAllReservations() {
+		return reservations;
+	}
+
+	@Override
+	public void make(Reservation reservation) throws ReservationNotAvailableException {
+		for (Reservation made : reservations) {
+			if (made.getCourtName().equals(reservation.getCourtName()) && made.getDate().equals(reservation.getDate())
+					&& made.getHour() == reservation.getHour()) {
+				throw new ReservationNotAvailableException(reservation.getCourtName(), reservation.getDate(),
+						reservation.getHour());
+					}
+			}
+		
+		reservations.add(reservation);
+	}
+
+	@Override
+	public List<SportType> getAllSportTypes() {
+		List<SportType> sportTypes=new ArrayList<SportType>();
+		
+		sportTypes.add(SOCCER);
+		sportTypes.add(TENNIS);
+		
+		return sportTypes;
+	}
+
+	@Override
+	public SportType getSportType(int sportTypeId) {
+		switch (sportTypeId){
+		case 1:
+			return TENNIS;
+		case 2:
+			return SOCCER;
+		default:
+			return null;
+				
+		}
+	}
+	
+	
 }

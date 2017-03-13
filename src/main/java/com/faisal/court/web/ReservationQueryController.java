@@ -1,6 +1,7 @@
 package com.faisal.court.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,17 +25,23 @@ public class ReservationQueryController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public void setupForm(){
-		
+	public String setupForm(Map<String, Object> map){
+		//List<Reservation> reservations=java.util.Collections.emptyList();
+		List<Reservation> reservations=reservationService.getAllReservations();
+		map.put("reservations", reservations);
+		//model.addAttribute("reservations", reservationService.getAllReservations());
+		//this one is the page name--below one
+		return "reservationQuery";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String submitForm(@RequestParam("courtName") String courtName, Model model){
+	public String submitForm(@RequestParam("courtName") String courtName, Map<String, Object> map){
 		List<Reservation> reservations=java.util.Collections.emptyList();
 		if(courtName!=null){
 			reservations=reservationService.query(courtName);
 		}
-		model.addAttribute("reservations", reservations);
+		map.put("reservations", reservations);
+		//model.addAttribute("reservations", reservations);
 		return "reservationQuery";
 	}
 	
