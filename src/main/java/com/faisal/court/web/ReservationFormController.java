@@ -44,8 +44,9 @@ public class ReservationFormController {
 	@RequestMapping(method=RequestMethod.POST)
 	public String submitForm(@ModelAttribute("reservation") Reservation reservation, BindingResult result,
 			SessionStatus status) {
+		System.out.println("From SubmitForm(value of reservation):"+reservation);
 		reservationService.make(reservation);
-		return "redirect:reservationSuccess";
+		return "redirect:reservationForm";
 	}
 
 }

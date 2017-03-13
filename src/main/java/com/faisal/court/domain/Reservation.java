@@ -49,6 +49,11 @@ public class Reservation {
 	}
 	
 	public Reservation(){}
+	@Override
+	public String toString() {
+		return "Reservation [courtName=" + courtName + ", date=" + date + ", hour=" + hour + ", player=" + player
+				+ ", sportType=" + sportType + "]";
+	}
 	
 	
 }

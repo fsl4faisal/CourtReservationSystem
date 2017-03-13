@@ -21,5 +21,11 @@ public class Player {
 		this.phone = phone;
 	}
 	public Player(){}
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", phone=" + phone + "]";
+	}
+	
+	
 	
 }

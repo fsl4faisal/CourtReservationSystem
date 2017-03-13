@@ -22,4 +22,10 @@ public class SportType {
 	}
 	
 	public SportType(){}
+	@Override
+	public String toString() {
+		return "SportType [id=" + id + ", name=" + name + "]";
+	}
+	
+	
 }

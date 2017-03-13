@@ -17,11 +17,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="paramName" value="language" />
 	</bean>
 
-	<!--
 	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
+			<!-- the  reservationNotAvailable is basically a jsp which is redirected if the exception happens-->
 				<prop
 					key="com.faisal.court.service.ReservationNotAvailableException">
 					reservationNotAvailable
@@ -30,7 +30,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		</property>
 		<property name="defaultErrorView" value="error" /> 
 	</bean>
-	-->
+	
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
@@ -40,8 +40,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 		</property>
 	</bean>
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<property name="webBindingInitializer">
+			<bean class="com.faisal.court.web.ReservationWebBindingInitializer" />
+		</property>
+	</bean>
 
 	<!-- for defining the properties file for messages -->
 	<bean id="messageSource"

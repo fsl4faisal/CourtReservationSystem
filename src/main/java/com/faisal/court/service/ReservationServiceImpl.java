@@ -66,6 +66,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public SportType getSportType(int sportTypeId) {
+		System.out.println("The Sport type is:"+sportTypeId);
 		switch (sportTypeId){
 		case 1:
 			return TENNIS;
@@ -73,7 +74,6 @@ public class ReservationServiceImpl implements ReservationService {
 			return SOCCER;
 		default:
 			return null;
-				
 		}
 	}
 	

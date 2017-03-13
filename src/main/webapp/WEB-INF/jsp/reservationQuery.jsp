@@ -22,6 +22,8 @@
 	<th>Date</th>
 	<th>Hour</th>
 	<th>Player</th>
+	<th>Phone</th>
+	<th>Sports Type</th>
 	</tr>
 	<c:forEach items="${reservations}" var="reservation">
 	<tr>
@@ -29,6 +31,8 @@
 		<td><fmt:formatDate value="${reservation.date}" pattern="yyyy-MM-dd"/> </td>
 		<td>${reservation.hour}</td>
 		<td>${reservation.player.name}</td>
+		<td>${reservation.player.phone}</td>
+		<td>${reservation.sportType.name}</td>
 	</tr>
 	</c:forEach>
 </table>
