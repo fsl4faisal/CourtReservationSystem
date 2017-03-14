@@ -1,11 +1,13 @@
 package com.faisal.court.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.faisal.court.domain.PeriodicReservation;
 import com.faisal.court.domain.Player;
 import com.faisal.court.domain.Reservation;
 import com.faisal.court.domain.SportType;
@@ -75,6 +77,27 @@ public class ReservationServiceImpl implements ReservationService {
 		default:
 			return null;
 		}
+	}
+
+	@Override
+	public void makePeriodic(PeriodicReservation periodicReservation) throws ReservationNotAvailableException {
+		Calendar fromCalendar = Calendar.getInstance();
+		fromCalendar.setTime(periodicReservation.getFromDate());
+		Calendar toCalendar = Calendar.getInstance();
+		toCalendar.setTime(periodicReservation.getToDate());
+		
+		while (fromCalendar.before(toCalendar)) {
+			Reservation reservation = new Reservation();
+			reservation.setCourtName(periodicReservation.getCourtName());
+			reservation.setDate(fromCalendar.getTime());
+			reservation.setHour(periodicReservation.getHour());
+			reservation.setPlayer(periodicReservation.getPlayer());
+			reservation.setSportType(periodicReservation.getSportType());
+			make(reservation);
+			fromCalendar.add(Calendar.DATE, periodicReservation.getPeriod());
+		}
+		
+		
 	}
 	
 	
