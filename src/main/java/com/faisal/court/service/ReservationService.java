@@ -1,5 +1,6 @@
 package com.faisal.court.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,5 +22,6 @@ public interface ReservationService {
 	public SportType getSportType(int sportTypeId);
 
 	public void makePeriodic(PeriodicReservation periodicReservation) throws ReservationNotAvailableException;
-
+	
+	public List<Reservation> findByDate(Date date);
 }

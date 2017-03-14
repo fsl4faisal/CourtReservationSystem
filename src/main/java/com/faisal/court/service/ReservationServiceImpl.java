@@ -2,6 +2,7 @@ package com.faisal.court.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -98,6 +99,17 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 		
 		
+	}
+
+	@Override
+	public List<Reservation> findByDate(Date date) {
+		List<Reservation> result=new ArrayList<Reservation>();
+		
+		for(Reservation reservation:reservations){
+			if(reservation.getDate().equals(date))
+				result.add(reservation);
+		}
+		return result;
 	}
 	
 	
